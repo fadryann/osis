@@ -1,0 +1,1748 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OSIS SMA PGRI 1 Pati</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        /* Reset and Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            background: linear-gradient(-45deg, #ff1e1e, #ff4444, #ff6666, #ff3333);
+            background-size: 400% 400%;
+            animation: gradient 15s ease infinite;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Scroll Progress Indicator */
+        .scroll-indicator {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: rgba(255,255,255,0.2);
+            z-index: 9999;
+        }
+
+        .scroll-progress {
+            height: 100%;
+            background: linear-gradient(90deg, #ef4444, #ff6666);
+            width: 0%;
+            transition: width 0.1s ease;
+        }
+
+        /* Header Styles */
+        header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            border-bottom: 3px solid #ef4444;
+            transition: all 0.3s ease;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .logo-icon {
+            width: 50px;
+            height: 50px;
+            background: #ef444400;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+            font-weight: bold;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            will-change: transform;
+        }
+
+        .logo-icon img {
+            width: 50px;
+            height: auto;
+            object-fit: cover;
+        }
+
+        .logo-text {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: rgb(0, 0, 0);
+            transition: all 0.3s ease;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: rgb(0, 0, 0);
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .nav-links a:hover {
+            color: #ef4444;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #ef4444;
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after,
+        .nav-links a.active::after {
+            width: 100%;
+        }
+
+        .nav-links a::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(239,68,68,0.1), transparent);
+            transition: left 0.5s;
+        }
+
+        .nav-links a:hover::before {
+            left: 100%;
+        }
+
+        /* Hero Section */
+        .hero {
+            margin-top: 80px;
+            padding: 80px 0;
+            text-align: center;
+            color: white;
+            position: relative;
+            will-change: transform;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 30px;
+            opacity: 0.9;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            padding: 15px 30px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .cta-button:hover::before {
+            left: 100%;
+        }
+
+        .cta-button:hover {
+            background: rgba(255, 255, 255, 0.3);
+            border-color: rgba(255, 255, 255, 0.5);
+            transform: translateY(-2px);
+        }
+
+        /* Main Content */
+        .main-content {
+            background: white;
+            margin: 0 20px;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        /* About Section */
+        .about {
+            padding: 60px 40px;
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 50px;
+            align-items: center;
+        }
+
+        .about-image {
+            position: relative;
+            will-change: transform;
+        }
+
+        .about-image::before {
+            content: '';
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            right: -20px;
+            bottom: -20px;
+            background: #ef4444;
+            border-radius: 20px;
+            z-index: -1;
+        }
+
+        .school-icon {
+            width: 100%;
+            height: 300px;
+            background: #f8f9fa;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 6rem;
+            color: #ef4444;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .about-content h2 {
+            font-size: 2.5rem;
+            color: #333;
+            margin-bottom: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .about-content h2:hover {
+            color: #ef4444;
+            transform: scale(1.05);
+        }
+
+        .about-content p {
+            color: #666;
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin-bottom: 20px;
+        }
+
+        /* Vision Mission Section */
+        .vision-mission {
+            background: #f8fafc;
+            padding: 60px 40px;
+        }
+
+        .vm-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+        }
+
+        .vm-card {
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            will-change: transform;
+        }
+
+        .vm-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, transparent, rgba(239,68,68,0.05), transparent);
+            transition: left 0.5s;
+        }
+
+        .vm-card:hover::before {
+            left: 100%;
+        }
+
+        .vm-card:hover {
+            transform: translateY(-15px) rotateX(5deg);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+        }
+
+        .vm-card h3 {
+            font-size: 2rem;
+            color: #333;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .vm-icon {
+            width: 60px;
+            height: 60px;
+            background: #ef4444;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .vm-card:hover .vm-icon {
+            transform: scale(1.1);
+        }
+
+        .vm-card p, .vm-card li {
+            color: #666;
+            line-height: 1.8;
+        }
+
+        .vm-card ul {
+            list-style: none;
+            margin-top: 20px;
+        }
+
+        .vm-card li {
+            margin-bottom: 10px;
+            padding-left: 20px;
+            position: relative;
+        }
+
+        .vm-card li::before {
+            content: '✦';
+            color: #ef4444;
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+        }
+
+        /* Journal Section */
+        .journal {
+            padding: 60px 40px;
+        }
+
+        .journal h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            color: #333;
+            margin-bottom: 50px;
+            transition: all 0.3s ease;
+        }
+
+        .journal h2:hover {
+            color: #ef4444;
+            transform: scale(1.05);
+        }
+
+        .journal-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+        }
+
+        .journal-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            position: relative;
+            will-change: transform;
+        }
+
+        .journal-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, transparent, rgba(255,255,255,0.1), transparent);
+            transition: left 0.5s;
+            z-index: 1;
+        }
+
+        .journal-card:hover::before {
+            left: 100%;
+        }
+
+        .journal-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 25px 50px rgba(0,0,0,0.2);
+        }
+
+        .journal-image {
+            height: 200px;
+            background: #ef4444;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 2rem;
+            transition: all 0.3s ease;
+        }
+
+        .journal-card:hover .journal-image {
+            transform: scale(1.1);
+        }
+
+        .journal-content {
+            padding: 25px;
+        }
+
+        .journal-content h3 {
+            font-size: 1.3rem;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .journal-meta {
+            color: #888;
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+        }
+
+        .journal-excerpt {
+            color: #666;
+            line-height: 1.6;
+        }
+
+        /* Footer */
+        .footer {
+            background: #1f2937;
+            color: white;
+            padding: 40px 0;
+            margin-top: 0;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+        }
+
+        .footer-section h3 {
+            margin-bottom: 20px;
+            color: #ef4444;
+        }
+
+        .footer-section p, .footer-section a {
+            color: #d1d5db;
+            text-decoration: none;
+            line-height: 1.6;
+        }
+
+        .footer-section a:hover {
+            color: #ef4444;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: #ef4444;
+            border-radius: 50%;
+            color: white;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .social-links a::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle, rgba(255,255,255,0.2) 0%, transparent 70%);
+            transform: scale(0);
+            transition: transform 0.3s ease;
+        }
+
+        .social-links a:hover::before {
+            transform: scale(1);
+        }
+
+        .social-links a:hover {
+            transform: translateY(-5px) rotate(360deg);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+            background: #dc2626;
+        }
+
+        /* Mobile Menu Button */
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: #333;
+            cursor: pointer;
+            padding: 10px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        /* Animations */
+        @keyframes gradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        @keyframes slideInUp {
+            0% { 
+                opacity: 0; 
+                transform: translateY(50px); 
+            }
+            100% { 
+                opacity: 1; 
+                transform: translateY(0); 
+            }
+        }
+
+        @keyframes slideInLeft {
+            0% { 
+                opacity: 0; 
+                transform: translateX(-100px); 
+            }
+            100% { 
+                opacity: 1; 
+                transform: translateX(0); 
+            }
+        }
+
+        @keyframes slideInRight {
+            0% { 
+                opacity: 0; 
+                transform: translateX(100px); 
+            }
+            100% { 
+                opacity: 1; 
+                transform: translateX(0); 
+            }
+        }
+
+        @keyframes bounceIn {
+            0% {
+                opacity: 0;
+                transform: scale(0.3) rotate(45deg);
+            }
+            50% {
+                opacity: 1;
+                transform: scale(1.1) rotate(-10deg);
+            }
+            70% {
+                transform: scale(0.9) rotate(5deg);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1) rotate(0);
+            }
+        }
+
+        @keyframes rotateIn {
+            0% {
+                opacity: 0;
+                transform: rotate(-360deg) scale(0);
+            }
+            100% {
+                opacity: 1;
+                transform: rotate(0deg) scale(1);
+            }
+        }
+
+        @keyframes zoomIn {
+            0% {
+                opacity: 0;
+                transform: scale(0.5);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        @keyframes wiggle {
+            0%, 7% { transform: rotateZ(0); }
+            15% { transform: rotateZ(-15deg); }
+            20% { transform: rotateZ(10deg); }
+            25% { transform: rotateZ(-10deg); }
+            30% { transform: rotateZ(6deg); }
+            35% { transform: rotateZ(-4deg); }
+            40%, 100% { transform: rotateZ(0); }
+        }
+
+        @keyframes heartbeat {
+            0% { transform: scale(1); }
+            14% { transform: scale(1.1); }
+            28% { transform: scale(1); }
+            42% { transform: scale(1.1); }
+            70% { transform: scale(1); }
+        }
+
+        @keyframes ripple {
+            from {
+                transform: scale(0);
+                opacity: 1;
+            }
+            to {
+                transform: scale(2);
+                opacity: 0;
+            }
+        }
+
+        /* Apply animations */
+        .school-icon {
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .school-icon:hover {
+            animation: heartbeat 1s ease-in-out infinite;
+            color: #ef4444;
+        }
+
+        .journal-image i {
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .vm-icon {
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        .vm-card:hover .vm-icon {
+            animation: wiggle 0.8s ease-in-out;
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .nav-links {
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: rgba(255, 255, 255, 0.98);
+                flex-direction: column;
+                padding: 20px;
+                box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+                transform: translateY(-100%);
+                opacity: 0;
+                visibility: hidden;
+                transition: all 0.3s ease;
+                display: none;
+            }
+            
+            .nav-links.active {
+                display: flex;
+                transform: translateY(0);
+                opacity: 1;
+                visibility: visible;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero p {
+                font-size: 1.1rem;
+            }
+
+            .about {
+                grid-template-columns: 1fr;
+                gap: 30px;
+                padding: 40px 20px;
+            }
+
+            .vm-container {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+
+            .journal-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .main-content {
+                margin: 0 10px;
+            }
+
+            .vm-card:hover {
+                transform: translateY(-10px);
+            }
+            
+            .journal-card:hover {
+                transform: translateY(-5px) scale(1.01);
+            }
+        }
+
+        /* Reduced motion for accessibility */
+        @media (prefers-reduced-motion: reduce) {
+            * {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+
+        /* Performance optimization */
+        .vm-card, .journal-card, .about-image, .logo-icon, .hero {
+            will-change: transform;
+            backface-visibility: hidden;
+            perspective: 1000px;
+        }
+
+        /* Custom cursor styles */
+        .custom-cursor {
+            position: fixed;
+            width: 20px;
+            height: 20px;
+            background: radial-gradient(circle, rgba(239,68,68,0.8), rgba(239,68,68,0.2));
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 9999;
+            mix-blend-mode: difference;
+            transition: transform 0.1s ease;
+            transform: translate(-50%, -50%);
+        }
+
+        /* Scroll to top button */
+        .scroll-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #ef4444, #ff6666);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            z-index: 1000;
+            box-shadow: 0 8px 25px rgba(239, 68, 68, 0.3);
+            font-size: 1.2rem;
+        }
+
+        .scroll-to-top.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        /* Loading states */
+        .loading {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.6s ease;
+        }
+
+        .loading.loaded {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Word animation */
+        .word {
+            display: inline-block;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.6s ease;
+        }
+
+        /* Particle canvas */
+        #particles-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -2;
+        }
+    </style>
+</head>
+<body>
+    <!-- Scroll Progress Indicator -->
+    <div class="scroll-indicator">
+        <div class="scroll-progress"></div>
+    </div>
+
+    <!-- Particles Canvas -->
+    <canvas id="particles-canvas"></canvas>
+
+    <header>
+        <nav class="container">
+            <div class="logo">
+                <div class="logo-icon">
+                    <img src="logo-sekolah.png" alt="">
+                </div>
+                <div class="logo-text">OSIS SMA PGRI 1 Pati</div>
+            </div>
+            <ul class="nav-links">
+                <li><a href="#beranda">Beranda</a></li>
+                <li><a href="#tentang">Tentang</a></li>
+                <li><a href="#visi-misi">Visi & Misi</a></li>
+                <li><a href="#jurnal">Jurnal</a></li>
+                <li><a href="#kontak">Kontak</a></li>
+            </ul>
+            <button class="mobile-menu-btn">
+                <i class="fas fa-bars"></i>
+            </button>
+        </nav>
+    </header>
+
+    <section class="hero" id="beranda">
+        <div class="container">
+            <h1>OSIS SMA PGRI 1 Pati</h1>
+            <p>Organisasi Siswa Intra Sekolah yang Dinamis dan Komunikatif</p>
+            <a href="#tentang" class="cta-button">Pelajari Lebih Lanjut</a>
+        </div>
+    </section>
+
+    <main class="main-content">
+        <section class="about" id="tentang">
+            <div class="about-image">
+                <div class="school-icon">
+                    <i class="fas fa-school"></i>
+                </div>
+            </div>
+            <div class="about-content">
+                <h2>Tentang Kami</h2>
+                <p>SMA PGRI 1 Pati, merupakan salah satu Sekolah Menengah Atas yang ada di Provinsi Jawa Tengah, Indonesia. Sama dengan SMA pada umumnya di Indonesia masa pendidikan sekolah di SMA PGRI 1 Pati ditempuh dalam waktu tiga tahun pelajaran, mulai dari Kelas X sampai Kelas XII.</p>
+                <p>Didirikan pada tahun 1981, sekolah ini telah menjadi institusi pendidikan yang mengutamakan kualitas dan karakter. Pada tahun 2013 sekolah ini menggunakan Kurikulum 2013 sesuai dengan kebijakan Pemerintah untuk memberikan pendidikan terbaik bagi siswa-siswinya.</p>
+                <p>OSIS SMA PGRI 1 Pati hadir sebagai wadah pengembangan bakat, minat, dan kepemimpinan siswa dalam menciptakan lingkungan sekolah yang kondusif dan berprestasi.</p>
+            </div>
+        </section>
+
+        <section class="vision-mission" id="visi-misi">
+            <div class="container">
+                <div class="vm-container">
+                    <div class="vm-card">
+                        <h3>
+                            <div class="vm-icon">
+                                <i class="fas fa-eye"></i>
+                            </div>
+                            Visi
+                        </h3>
+                        <p>OSIS SMA PGRI 1 Pati sebagai organisasi yang dinamis serta komunikatif dengan berpijak pada agama dan kekeluargaan.</p>
+                    </div>
+                    <div class="vm-card">
+                        <h3>
+                            <div class="vm-icon">
+                                <i class="fas fa-bullseye"></i>
+                            </div>
+                            Misi
+                        </h3>
+                        <ul>
+                            <li>Meningkatkan dan menjaga mutu kerja OSIS SMA PGRI 1 Pati</li>
+                            <li>Menjalin hubungan yang baik dengan keluarga SMA PGRI 1 Pati</li>
+                            <li>Memberikan suasana yang aman dan damai bagi keluarga SMA PGRI 1 Pati</li>
+                            <li>Mengoptimalkan program kerja yang telah disepakati sesuai dengan perkembangan zaman</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="journal" id="jurnal">
+            <div class="container">
+                <h2>Jurnal Kegiatan</h2>
+                <div class="journal-grid">
+                    <article class="journal-card">
+                        <div class="journal-image">
+                            <i class="fas fa-briefcase"></i>
+                        </div>
+                        <div class="journal-content">
+                            <h3>Hari Karir 2025</h3>
+                            <div class="journal-meta">SMA PGRI 1 Pati • 13 Februari 2025</div>
+                            <p class="journal-excerpt">Kegiatan Hari Karir 2025 yang diselenggarakan untuk memberikan wawasan kepada siswa tentang berbagai pilihan karir dan profesi di masa depan.</p>
+                        </div>
+                    </article>
+
+                    <article class="journal-card">
+                        <div class="journal-image">
+                            <i class="fas fa-chalkboard-teacher"></i>
+                        </div>
+                        <div class="journal-content">
+                            <h3>Hari Guru 2025</h3>
+                            <div class="journal-meta">Seksi Bidang II • 29 November 2025</div>
+                            <p class="journal-excerpt">Perayaan Hari Guru sebagai bentuk apresiasi dan penghormatan kepada seluruh guru yang telah berdedikasi dalam dunia pendidikan.</p>
+                        </div>
+                    </article>
+
+                    <article class="journal-card">
+                        <div class="journal-image">
+                            <i class="fas fa-dove"></i>
+                        </div>
+                        <div class="journal-content">
+                            <h3>Paskah</h3>
+                            <div class="journal-meta">Seksi Bidang I • 17 April 2025</div>
+                            <p class="journal-excerpt">Perayaan Paskah di SMA PGRI 1 Pati sebagai wujud toleransi dan keberagaman dalam lingkungan sekolah yang harmonis.</p>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer" id="kontak">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>OSIS SMA PGRI 1 Pati</h3>
+                    <p>Organisasi Siswa Intra Sekolah yang berkomitmen untuk mengembangkan potensi siswa dan menciptakan lingkungan sekolah yang kondusif.</p>
+                    <div class="social-links">
+                        <a href="https://www.instagram.com/osissmagri1pati/?hl=id" target="_blank"><i class="fab fa-instagram"></i></a>
+                        <a href="https://api.whatsapp.com/send/?phone=6283892959859&text&type=phone_number&app_absent=0" target="_blank"><i class="fab fa-whatsapp"></i></a>
+                        <a href="https://www.tiktok.com/@osissmagrisapa?_t=8o0VRiqsVsn&_r=1" target="_blank"><i class="fab fa-tiktok"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h3>Kontak</h3>
+                    <p><i class="fas fa-map-marker-alt"></i> SMA PGRI 1 Pati<br>Jl. A. Yani Gg. Manggis 99, Winong, Pati.</p>
+                    <p><i class="fas fa-phone"></i> (0295) 382243</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Menu</h3>
+                    <p><a href="#beranda">Beranda</a></p>
+                    <p><a href="#tentang">Tentang Kami</a></p>
+                    <p><a href="#visi-misi">Visi & Misi</a></p>
+                    <p><a href="#jurnal">Jurnal</a></p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scroll to Top Button -->
+    <button class="scroll-to-top" id="scrollToTop">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <script>
+        // Enhanced JavaScript with Cool Animations
+        document.addEventListener('DOMContentLoaded', function() {
+            initScrollProgress();
+            initSmoothScrolling();
+            initActiveNavigation();
+            initScrollAnimations();
+            initHeaderScrollEffect();
+            initMobileMenu();
+            initLoadingAnimations();
+            initParallaxEffect();
+            initFloatingElements();
+            initMouseFollower();
+            initScrollToTop();
+            initInteractiveElements();
+            initParticleEffect();
+            initTypewriterEffect();
+        });
+
+        // Scroll Progress Indicator
+        function initScrollProgress() {
+            const progressBar = document.querySelector('.scroll-progress');
+            
+            window.addEventListener('scroll', () => {
+                const scrollTop = window.pageYOffset;
+                const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+                const scrollPercent = (scrollTop / docHeight) * 100;
+                progressBar.style.width = scrollPercent + '%';
+            });
+        }
+
+        // Custom smooth scroll function
+        function smoothScrollTo(target, duration) {
+            const start = window.pageYOffset;
+            const distance = target - start;
+            const startTime = performance.now();
+
+            function scroll(currentTime) {
+                const elapsedTime = currentTime - startTime;
+                const progress = Math.min(elapsedTime / duration, 1);
+                const easeProgress = 1 - Math.pow(1 - progress, 3);
+                
+                window.scrollTo(0, start + (distance * easeProgress));
+                
+                if (progress < 1) {
+                    requestAnimationFrame(scroll);
+                }
+            }
+            
+            requestAnimationFrame(scroll);
+        }
+
+        // Enhanced Smooth Scrolling
+        function initSmoothScrolling() {
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    
+                    if (target) {
+                        const headerHeight = document.querySelector('header').offsetHeight;
+                        const targetPosition = target.offsetTop - headerHeight;
+                        smoothScrollTo(targetPosition, 1000);
+                        
+                        const navLinks = document.querySelector('.nav-links');
+                        if (navLinks.classList.contains('active')) {
+                            navLinks.classList.remove('active');
+                        }
+                    }
+                });
+            });
+        }
+
+        // Enhanced Active Navigation
+        function initActiveNavigation() {
+            const navLinks = document.querySelectorAll('.nav-links a');
+            const sections = document.querySelectorAll('section[id]');
+            
+            function updateActiveLink() {
+                let current = '';
+                const headerHeight = document.querySelector('header').offsetHeight;
+                
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop - headerHeight - 50;
+                    const sectionHeight = section.offsetHeight;
+                    const scrollPosition = window.pageYOffset;
+                    
+                    if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
+                        current = section.getAttribute('id');
+                    }
+                });
+
+                navLinks.forEach(link => {
+                    link.classList.remove('active');
+                    if (link.getAttribute('href').substring(1) === current) {
+                        link.classList.add('active');
+                    }
+                });
+            }
+            
+            let ticking = false;
+            window.addEventListener('scroll', () => {
+                if (!ticking) {
+                    requestAnimationFrame(updateActiveLink);
+                    ticking = true;
+                    setTimeout(() => { ticking = false; }, 16);
+                }
+            });
+        }
+
+        // Scroll Animations
+        function initScrollAnimations() {
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.animation = 'slideInUp 0.8s ease-out both';
+                        
+                        if (entry.target.classList.contains('journal-card') || 
+                            entry.target.classList.contains('vm-card')) {
+                            const delay = Array.from(entry.target.parentNode.children).indexOf(entry.target) * 200;
+                            entry.target.style.animationDelay = `${delay}ms`;
+                        }
+                        
+                        if (entry.target.classList.contains('about-content')) {
+                            entry.target.style.animation = 'slideInRight 1s ease-out both';
+                        }
+                        
+                        if (entry.target.classList.contains('about-image')) {
+                            entry.target.style.animation = 'slideInLeft 1s ease-out both';
+                        }
+                    }
+                });
+            }, observerOptions);
+
+            document.querySelectorAll('.vm-card, .journal-card, .about-content, .about-image, .footer-section').forEach(el => {
+                observer.observe(el);
+            });
+        }
+
+        // Enhanced Header Scroll Effect
+        function initHeaderScrollEffect() {
+            const header = document.querySelector('header');
+            let lastScrollY = window.pageYOffset;
+            
+            function updateHeader() {
+                const scrollY = window.pageYOffset;
+                
+                if (scrollY > 100) {
+                    header.style.background = 'rgba(255, 255, 255, 0.98)';
+                    header.style.boxShadow = '0 8px 32px rgba(0, 0, 0, 0.15)';
+                    header.style.backdropFilter = 'blur(20px)';
+                } else {
+                    header.style.background = 'rgba(255, 255, 255, 0.95)';
+                    header.style.boxShadow = '0 8px 32px rgba(0, 0, 0, 0.1)';
+                    header.style.backdropFilter = 'blur(10px)';
+                }
+                
+                if (scrollY > lastScrollY && scrollY > 200) {
+                    header.style.transform = 'translateY(-100%)';
+                } else {
+                    header.style.transform = 'translateY(0)';
+                }
+                
+                lastScrollY = scrollY;
+            }
+            
+            let ticking = false;
+            window.addEventListener('scroll', () => {
+                if (!ticking) {
+                    requestAnimationFrame(updateHeader);
+                    ticking = true;
+                    setTimeout(() => { ticking = false; }, 16);
+                }
+            });
+        }
+
+        // Enhanced Mobile Menu
+        function initMobileMenu() {
+            const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+            const navLinks = document.querySelector('.nav-links');
+            
+            mobileMenuBtn.addEventListener('click', () => {
+                navLinks.classList.toggle('active');
+                mobileMenuBtn.style.transform = 'rotate(180deg)';
+                
+                setTimeout(() => {
+                    mobileMenuBtn.style.transform = 'rotate(0deg)';
+                }, 300);
+                
+                const icon = mobileMenuBtn.querySelector('i');
+                if (navLinks.classList.contains('active')) {
+                    icon.className = 'fas fa-times';
+                    mobileMenuBtn.style.background = 'rgba(239, 68, 68, 0.1)';
+                } else {
+                    icon.className = 'fas fa-bars';
+                    mobileMenuBtn.style.background = 'none';
+                }
+            });
+
+            document.addEventListener('click', (e) => {
+                if (!document.querySelector('nav').contains(e.target) && navLinks.classList.contains('active')) {
+                    navLinks.classList.remove('active');
+                    mobileMenuBtn.querySelector('i').className = 'fas fa-bars';
+                    mobileMenuBtn.style.background = 'none';
+                }
+            });
+        }
+
+        // Loading Animations with Stagger Effect
+        function initLoadingAnimations() {
+            const elementsToAnimate = [
+                { selector: '.logo-icon', delay: 0 },
+                { selector: '.logo-text', delay: 200 },
+                { selector: '.nav-links li', delay: 400, stagger: 100 },
+                { selector: '.hero h1', delay: 800 },
+                { selector: '.hero p', delay: 1000 },
+                { selector: '.cta-button', delay: 1200 }
+            ];
+            
+            elementsToAnimate.forEach(({ selector, delay, stagger }) => {
+                const elements = document.querySelectorAll(selector);
+                
+                elements.forEach((el, index) => {
+                    el.style.opacity = '0';
+                    el.style.transform = 'translateY(30px)';
+                    el.style.transition = 'all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
+                    
+                    const totalDelay = delay + (stagger ? index * stagger : 0);
+                    
+                    setTimeout(() => {
+                        el.style.opacity = '1';
+                        el.style.transform = 'translateY(0)';
+                    }, totalDelay);
+                });
+            });
+        }
+
+        // Parallax Effect
+        function initParallaxEffect() {
+            const parallaxElements = [
+                { element: document.querySelector('.hero'), speed: 0.5 },
+                { element: document.querySelector('.about-image'), speed: 0.3 }
+            ];
+            
+            let ticking = false;
+            window.addEventListener('scroll', () => {
+                if (!ticking) {
+                    requestAnimationFrame(() => {
+                        const scrolled = window.pageYOffset;
+                        
+                        parallaxElements.forEach(({ element, speed }) => {
+                            if (element) {
+                                const rect = element.getBoundingClientRect();
+                                const isVisible = rect.bottom >= 0 && rect.top <= window.innerHeight;
+                                
+                                if (isVisible) {
+                                    const yPos = scrolled * speed;
+                                    element.style.transform = `translate3d(0, ${yPos}px, 0)`;
+                                }
+                            }
+                        });
+                        
+                        ticking = false;
+                    });
+                    ticking = true;
+                }
+            });
+        }
+
+        // Typewriter Effect
+        function initTypewriterEffect() {
+            const heroTitle = document.querySelector('.hero h1');
+            if (heroTitle) {
+                const text = heroTitle.textContent;
+                heroTitle.textContent = '';
+                
+                let i = 0;
+                function typeWriter() {
+                    if (i < text.length) {
+                        heroTitle.textContent += text.charAt(i);
+                        i++;
+                        setTimeout(typeWriter, 100);
+                    }
+                }
+                
+                setTimeout(typeWriter, 1000);
+            }
+        }
+
+        // Floating Elements
+        function initFloatingElements() {
+            const shapes = ['circle', 'triangle', 'square'];
+            const colors = ['rgba(255,255,255,0.1)', 'rgba(239,68,68,0.1)', 'rgba(255,102,102,0.1)'];
+            
+            for (let i = 0; i < 6; i++) {
+                const shape = document.createElement('div');
+                const shapeType = shapes[Math.floor(Math.random() * shapes.length)];
+                const color = colors[Math.floor(Math.random() * colors.length)];
+                const size = 20 + Math.random() * 60;
+                
+                shape.style.cssText = `
+                    position: fixed;
+                    width: ${size}px;
+                    height: ${size}px;
+                    background: ${color};
+                    border-radius: ${shapeType === 'circle' ? '50%' : '10px'};
+                    top: ${Math.random() * 100}vh;
+                    left: ${Math.random() * 100}vw;
+                    z-index: -1;
+                    animation: float ${3 + Math.random() * 4}s ease-in-out infinite;
+                    animation-delay: ${Math.random() * 2}s;
+                    pointer-events: none;
+                `;
+                
+                document.body.appendChild(shape);
+            }
+        }
+
+        // Mouse Follower
+        function initMouseFollower() {
+            const cursor = document.createElement('div');
+            cursor.className = 'custom-cursor';
+            document.body.appendChild(cursor);
+            
+            let mouseX = 0, mouseY = 0;
+            let cursorX = 0, cursorY = 0;
+            
+            document.addEventListener('mousemove', (e) => {
+                mouseX = e.clientX;
+                mouseY = e.clientY;
+            });
+            
+            function animateCursor() {
+                cursorX += (mouseX - cursorX) * 0.1;
+                cursorY += (mouseY - cursorY) * 0.1;
+                cursor.style.left = cursorX + 'px';
+                cursor.style.top = cursorY + 'px';
+                requestAnimationFrame(animateCursor);
+            }
+            animateCursor();
+            
+            const interactiveElements = document.querySelectorAll('a, button, .vm-card, .journal-card');
+            interactiveElements.forEach(el => {
+                el.addEventListener('mouseenter', () => {
+                    cursor.style.transform = 'translate(-50%, -50%) scale(2)';
+                    cursor.style.background = 'radial-gradient(circle, rgba(99,102,241,0.8), rgba(99,102,241,0.2))';
+                });
+                
+                el.addEventListener('mouseleave', () => {
+                    cursor.style.transform = 'translate(-50%, -50%) scale(1)';
+                    cursor.style.background = 'radial-gradient(circle, rgba(239,68,68,0.8), rgba(239,68,68,0.2))';
+                });
+            });
+        }
+
+        // Scroll to Top Button
+        function initScrollToTop() {
+            const scrollBtn = document.getElementById('scrollToTop');
+            
+            window.addEventListener('scroll', () => {
+                if (window.pageYOffset > 300) {
+                    scrollBtn.classList.add('visible');
+                } else {
+                    scrollBtn.classList.remove('visible');
+                }
+            });
+            
+            scrollBtn.addEventListener('mouseenter', () => {
+                scrollBtn.style.transform = 'scale(1.1)';
+                scrollBtn.style.boxShadow = '0 12px 35px rgba(239, 68, 68, 0.4)';
+                scrollBtn.style.background = 'linear-gradient(135deg, #dc2626, #ef4444)';
+            });
+            
+            scrollBtn.addEventListener('mouseleave', () => {
+                scrollBtn.style.transform = 'scale(1)';
+                scrollBtn.style.boxShadow = '0 8px 25px rgba(239, 68, 68, 0.3)';
+                scrollBtn.style.background = 'linear-gradient(135deg, #ef4444, #ff6666)';
+            });
+            
+            scrollBtn.addEventListener('click', () => {
+                scrollBtn.style.transform = 'scale(0.9)';
+                setTimeout(() => {
+                    scrollBtn.style.transform = 'scale(1)';
+                }, 150);
+                
+                smoothScrollTo(0, 1000);
+            });
+        }
+
+        // Interactive Elements with Ripple Effect
+        function initInteractiveElements() {
+            const cards = document.querySelectorAll('.vm-card, .journal-card');
+            
+            cards.forEach(card => {
+                card.addEventListener('click', function(e) {
+                    const ripple = document.createElement('span');
+                    const rect = this.getBoundingClientRect();
+                    const size = Math.max(rect.width, rect.height);
+                    const x = e.clientX - rect.left - size / 2;
+                    const y = e.clientY - rect.top - size / 2;
+                    
+                    ripple.style.cssText = `
+                        position: absolute;
+                        width: ${size}px;
+                        height: ${size}px;
+                        background: radial-gradient(circle, rgba(255,255,255,0.3), transparent);
+                        border-radius: 50%;
+                        left: ${x}px;
+                        top: ${y}px;
+                        animation: ripple 0.6s ease-out;
+                        pointer-events: none;
+                    `;
+                    
+                    this.style.position = 'relative';
+                    this.style.overflow = 'hidden';
+                    this.appendChild(ripple);
+                    
+                    setTimeout(() => {
+                        ripple.remove();
+                    }, 600);
+                });
+
+                // 3D Tilt Effect
+                card.addEventListener('mousemove', (e) => {
+                    const rect = card.getBoundingClientRect();
+                    const centerX = rect.left + rect.width / 2;
+                    const centerY = rect.top + rect.height / 2;
+                    
+                    const deltaX = e.clientX - centerX;
+                    const deltaY = e.clientY - centerY;
+                    
+                    const rotateX = (deltaY / rect.height) * 15;
+                    const rotateY = (deltaX / rect.width) * 15;
+                    
+                    card.style.transform = `perspective(1000px) rotateX(${-rotateX}deg) rotateY(${rotateY}deg) translateZ(10px)`;
+                });
+                
+                card.addEventListener('mouseleave', () => {
+                    card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) translateZ(0px)';
+                });
+            });
+
+            // Magnetic Effect for Buttons
+            const buttons = document.querySelectorAll('.cta-button, .scroll-to-top');
+            buttons.forEach(button => {
+                button.addEventListener('mousemove', (e) => {
+                    const rect = button.getBoundingClientRect();
+                    const centerX = rect.left + rect.width / 2;
+                    const centerY = rect.top + rect.height / 2;
+                    
+                    const deltaX = (e.clientX - centerX) * 0.3;
+                    const deltaY = (e.clientY - centerY) * 0.3;
+                    
+                    button.style.transform = `translate(${deltaX}px, ${deltaY}px)`;
+                });
+                
+                button.addEventListener('mouseleave', () => {
+                    button.style.transform = 'translate(0px, 0px)';
+                });
+            });
+        }
+
+        // Particle Effect
+        function initParticleEffect() {
+            const canvas = document.getElementById('particles-canvas');
+            const ctx = canvas.getContext('2d');
+            
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            
+            const particles = [];
+            const particleCount = 50;
+            
+            class Particle {
+                constructor() {
+                    this.x = Math.random() * canvas.width;
+                    this.y = Math.random() * canvas.height;
+                    this.vx = (Math.random() - 0.5) * 2;
+                    this.vy = (Math.random() - 0.5) * 2;
+                    this.radius = Math.random() * 3 + 1;
+                    this.opacity = Math.random() * 0.5 + 0.2;
+                }
+                
+                update() {
+                    this.x += this.vx;
+                    this.y += this.vy;
+                    
+                    if (this.x < 0 || this.x > canvas.width) this.vx = -this.vx;
+                    if (this.y < 0 || this.y > canvas.height) this.vy = -this.vy;
+                }
+                
+                draw() {
+                    ctx.beginPath();
+                    ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+                    ctx.fillStyle = `rgba(255, 255, 255, ${this.opacity})`;
+                    ctx.fill();
+                }
+            }
+            
+            for (let i = 0; i < particleCount; i++) {
+                particles.push(new Particle());
+            }
+            
+            function animate() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                
+                particles.forEach(particle => {
+                    particle.update();
+                    particle.draw();
+                });
+                
+                // Draw connections between nearby particles
+                for (let i = 0; i < particles.length; i++) {
+                    for (let j = i + 1; j < particles.length; j++) {
+                        const dx = particles[i].x - particles[j].x;
+                        const dy = particles[i].y - particles[j].y;
+                        const distance = Math.sqrt(dx * dx + dy * dy);
+                        
+                        if (distance < 100) {
+                            ctx.beginPath();
+                            ctx.moveTo(particles[i].x, particles[i].y);
+                            ctx.lineTo(particles[j].x, particles[j].y);
+                            ctx.strokeStyle = `rgba(255, 255, 255, ${0.1 * (1 - distance / 100)})`;
+                            ctx.stroke();
+                        }
+                    }
+                }
+                
+                requestAnimationFrame(animate);
+            }
+            
+            animate();
+            
+            window.addEventListener('resize', () => {
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight;
+            });
+        }
+
+        // Text Animation Effects
+        function initTextAnimations() {
+            const observerOptions = {
+                threshold: 0.5,
+                rootMargin: '0px'
+            };
+
+            const textObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const element = entry.target;
+                        const text = element.textContent;
+                        const words = text.split(' ');
+                        
+                        element.innerHTML = words.map((word, index) => 
+                            `<span class="word" style="display: inline-block; opacity: 0; transform: translateY(20px); transition: all 0.6s ease ${index * 0.1}s;">${word}</span>`
+                        ).join(' ');
+                        
+                        setTimeout(() => {
+                            element.querySelectorAll('.word').forEach(word => {
+                                word.style.opacity = '1';
+                                word.style.transform = 'translateY(0)';
+                            });
+                        }, 100);
+                        
+                        textObserver.unobserve(element);
+                    }
+                });
+            }, observerOptions);
+
+            document.querySelectorAll('.about-content h2, .journal h2').forEach(el => {
+                textObserver.observe(el);
+            });
+        }
+
+        // Counter Animation
+        function initCounterAnimation() {
+            const observerOptions = {
+                threshold: 0.5,
+                rootMargin: '0px'
+            };
+
+            const counterObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const counter = entry.target;
+                        const target = parseInt(counter.getAttribute('data-target') || '100');
+                        const duration = 2000;
+                        const startTime = performance.now();
+                        
+                        function updateCounter(currentTime) {
+                            const elapsedTime = currentTime - startTime;
+                            const progress = Math.min(elapsedTime / duration, 1);
+                            const easeProgress = 1 - Math.pow(1 - progress, 3);
+                            const currentCount = Math.floor(target * easeProgress);
+                            
+                            counter.textContent = currentCount;
+                            
+                            if (progress < 1) {
+                                requestAnimationFrame(updateCounter);
+                            } else {
+                                counter.textContent = target;
+                            }
+                        }
+                        
+                        requestAnimationFrame(updateCounter);
+                        counterObserver.unobserve(counter);
+                    }
+                });
+            }, observerOptions);
+
+            document.querySelectorAll('.counter').forEach(counter => {
+                counterObserver.observe(counter);
+            });
+        }
+
+        // Initialize additional animations
+        setTimeout(() => {
+            initTextAnimations();
+            initCounterAnimation();
+        }, 500);
+
+        // Performance optimization
+        let scrollTimeout;
+        const originalScrollEvents = [];
+        
+        window.addEventListener('scroll', function() {
+            if (!scrollTimeout) {
+                scrollTimeout = setTimeout(() => {
+                    scrollTimeout = null;
+                }, 16); // ~60fps
+            }
+        });
+
+        // Error handling
+        window.addEventListener('error', function(e) {
+            console.error('Animation Error:', e.error);
+        });
+
+        // Performance monitoring
+        window.addEventListener('load', function() {
+            const loadTime = performance.now();
+            console.log(`Enhanced animations loaded in ${loadTime.toFixed(2)}ms`);
+            document.body.classList.add('loaded');
+        });
+
+        // Intersection Observer for lazy loading
+        const imageObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const img = entry.target;
+                    if (img.dataset.src) {
+                        img.src = img.dataset.src;
+                        img.classList.remove('lazy');
+                        imageObserver.unobserve(img);
+                    }
+                }
+            });
+        });
+
+        document.querySelectorAll('img[data-src]').forEach(img => {
+            imageObserver.observe(img);
+        });
+
+        // Easter egg - konami code
+        let konamiCode = [38, 38, 40, 40, 37, 39, 37, 39, 66, 65];
+        let konamiIndex = 0;
+
+        document.addEventListener('keydown', function(e) {
+            if (e.keyCode === konamiCode[konamiIndex]) {
+                konamiIndex++;
+                if (konamiIndex === konamiCode.length) {
+                    // Activate special animation
+                    document.body.style.animation = 'gradient 1s ease infinite';
+                    setTimeout(() => {
+                        document.body.style.animation = 'gradient 15s ease infinite';
+                    }, 5000);
+                    konamiIndex = 0;
+                }
+            } else {
+                konamiIndex = 0;
+            }
+        });
+
+        // Dark mode toggle (optional)
+        function toggleDarkMode() {
+            document.body.classList.toggle('dark-mode');
+            localStorage.setItem('darkMode', document.body.classList.contains('dark-mode'));
+        }
+
+        // Check for saved dark mode preference
+        if (localStorage.getItem('darkMode') === 'true') {
+            document.body.classList.add('dark-mode');
+        }
+
+        // Add keyboard navigation
+        document.addEventListener('keydown', function(e) {
+            switch(e.key) {
+                case 'Home':
+                    e.preventDefault();
+                    smoothScrollTo(0, 1000);
+                    break;
+                case 'End':
+                    e.preventDefault();
+                    smoothScrollTo(document.documentElement.scrollHeight, 1000);
+                    break;
+            }
+        });
+
+        // Add focus management for accessibility
+        document.querySelectorAll('a, button').forEach(element => {
+            element.addEventListener('focus', function() {
+                this.style.outline = '2px solid #ef4444';
+                this.style.outlineOffset = '2px';
+            });
+            
+            element.addEventListener('blur', function() {
+                this.style.outline = 'none';
+            });
+        });
+
+        // Preload critical resources
+        const link = document.createElement('link');
+        link.rel = 'preconnect';
+        link.href = 'https://fonts.googleapis.com';
+        document.head.appendChild(link);
+
+        // Service worker registration (optional)
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/sw.js')
+                    .then(registration => {
+                        console.log('SW registered: ', registration);
+                    })
+                    .catch(registrationError => {
+                        console.log('SW registration failed: ', registrationError);
+                    });
+            });
+        }
+    </script>
+</body>
+</html>
